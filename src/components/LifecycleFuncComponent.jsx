@@ -12,10 +12,6 @@ const LifecycleFuncComponent = () => {
         setCounter(counter + 10)
     }
 
-    const decreament = () => {
-        setCounter(counter - 10)
-    }
-
     console.log("render")    
     console.log("counter", counter)    
 
@@ -29,7 +25,6 @@ const LifecycleFuncComponent = () => {
         <button 
             onClick={() => setCounter(counter + 10)}
         >Increment v2</button>
-        <button onClick={decreament}>Decreament</button>
 
         <hr />
 
@@ -48,6 +43,5 @@ const LifecycleFuncComponent = () => {
     </div>
 }
 
-// Task one in LifecycleFuncComponent is finished.    
 
 export default LifecycleFuncComponent

@@ -30,11 +30,6 @@ export default class LifecycleClassComponent extends Component {
         }))
     }
 
-    decrement = () => {
-        this.setState((state) =>({
-            counter : state.counter - 10
-        }))
-    }
 
 
     render() {
@@ -51,9 +46,6 @@ export default class LifecycleClassComponent extends Component {
             <button
                 onClick={this.increment}
             >Increment</button>
-            <button
-                onClick={this.decrement}
-            >Decreament</button>
         </div>
     }
 }
