@@ -6,24 +6,12 @@ export default class LifecycleClassComponent extends Component {
 
     constructor(props) {
         super(props)
-
         this.state = {
-            counter : 8
+            counter : 8,
+            inputValue : 0
         }
-
-        console.log("LifecycleClassComponent => constructor" )
     }
-
-    componentDidMount() {
-        console.log("LifecycleClassComponent => componentDidMount" )
-    }
-
-    componentWillUnmount(){
-        console.log("LifecycleClassComponent => componentWillUnmount" )
-    }
-
     increment = () => {
-        console.log("increment" )
         // this.state.counter = 20
         this.setState((state) => ({
             counter : state.counter + 10
@@ -33,14 +21,20 @@ export default class LifecycleClassComponent extends Component {
     decrement = () => {
         this.setState((state) =>({
             counter : state.counter - 10
-        }))
+        })) 
+    }
+    handleChange = (e) => {
+        this.setState({inputValue: e.target.value});
+    }
+    handleIncrement = () => {
+        this.setState({counter: this.state.counter + parseInt(this.state.inputValue)});
+    }
+    handleDecrease = () => {
+        this.setState({counter: this.state.counter - parseInt(this.state.inputValue)})
     }
 
 
     render() {
-
-        console.log("LifecycleClassComponent => render" )
-
         return <div>
             <hr />
             Class Component
@@ -53,9 +47,21 @@ export default class LifecycleClassComponent extends Component {
             >Increment</button>
             <button
                 onClick={this.decrement}
-            >Decreament</button>
+            >Decreament</button>    
+            <br />
+            <input 
+                type="text"
+                placeholder="Enter number"
+                value={this.state.inputValue}
+                onChange={this.handleChange}
+                style={{width: "100px"}}
+            />
+            <button
+                onClick={this.handleIncrement}
+            >Increase</button>
+            <button
+                onClick={this.handleDecrease}
+            >Decrease</button>
         </div>
     }
 }
-
-// Task one in LifecycleClassComponent is finished.
