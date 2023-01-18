@@ -1,4 +1,10 @@
+import Todos from "./components/Todos";
+
 const App = () => {
-  return <></>;
+  return (
+    <>
+      <Todos />
+    </>
+  );
 };
 export default App;
