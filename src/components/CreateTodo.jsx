@@ -28,7 +28,7 @@ const CreateTodo = (props) => {
           setNewTodo(e.target.value);
         }}
       />
-      <button onClick={onClickHandler}>CreateTodo</button>
+      <button onClick={onClickHandler}>Create new Todo</button>
     </div>
   );
 };

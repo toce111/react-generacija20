@@ -16,14 +16,19 @@ const Todo = () => {
   const deleteTodo = (id) => {
     setTodos([...todos.filter((todo) => todo.id !== id)]);
   };
-
-  const markComplete = (complete) => {
-    setTodos([...todos.filter((todo) => todo.complete !== complete)]);
+  const markComplete = (index) => {
+    const newTodos = [...todos];
+    newTodos[index].completed = !newTodos[index].completed;
+    setTodos(newTodos);
   };
   return (
     <div>
-      <CreateTodo setTodos={setTodos} markComplete={markComplete} />
-      <ListTodo todos={todos} deleteTodo={deleteTodo} />
+      <ListTodo
+        todos={todos}
+        deleteTodo={deleteTodo}
+        markComplete={markComplete}
+      />
+      <CreateTodo setTodos={setTodos} />
     </div>
   );
 };
