@@ -1,0 +1,9 @@
+td,
+th {
+  padding: 5px;
+  color: firebrick;
+}
+
+.mark-as-done {
+  text-decoration: line-through;
+}

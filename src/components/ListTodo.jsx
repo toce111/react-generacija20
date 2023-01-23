@@ -1,5 +1,14 @@
+import { useState } from "react";
+import "./css/style.css";
+
 const ListTodo = (props) => {
-  const { todos, deleteTodo, markComplete } = props;
+  const { todos, deleteTodo, markAsCompleted, updateTodoTitle } = props;
+
+  const [displayCompleted, setDisplayCompleted] = useState(true);
+
+  const [editId, setEditId] = useState("");
+  const [editTitle, setEditTitle] = useState("");
+
   const style = {
     border: "1px solid black",
     borderCollapse: "collapse",
@@ -34,6 +43,15 @@ const ListTodo = (props) => {
     color: "#ffff",
   };
 
+  const save = () => {
+    updateTodoTitle(editId, editTitle);
+    setEditId("");
+  };
+
+  const cancel = () => {
+    setEditId("");
+    setEditTitle("");
+  };
   return (
     <div>
       <table style={style}>
@@ -43,37 +61,78 @@ const ListTodo = (props) => {
             <td>ID</td>
             <td>Title</td>
             <td>Completed</td>
-            <td>Delete</td>
             <td>Complete</td>
             <td>Edit</td>
+            <td>Delete</td>
           </tr>
         </thead>
         <tbody>
-          {todos.map((todo, index) => (
-            <tr>
-              <td>{todo.userId}</td>
-              <td>{todo.id}</td>
-              <td>{todo.title}</td>
-              <td>
-                <input type="checkbox" checked={todo.completed} />
-              </td>
-              <td>
-                <button style={redbutton} onClick={() => deleteTodo(todo.id)}>
-                  ❌
-                </button>
-              </td>
-              <td>
-                <button style={greenbutton} onClick={() => markComplete(index)}>
-                  ✔️
-                </button>
-              </td>
-              <td>
-                <button style={editbutton}>✏️</button>
-              </td>
-            </tr>
-          ))}
+          {todos.map(
+            (todo) =>
+              (!todo.completed || displayCompleted) && (
+                <tr>
+                  <td>{todo.userId}</td>
+                  <td>{todo.id}</td>
+                  {editId && editId === todo.id ? (
+                    <td>
+                      <textarea
+                        type="text"
+                        value={editTitle}
+                        onChange={(e) => setEditTitle(e.target.value)}
+                        size={todo.title.length}
+                      />
+                      <input type="button" value="Save" onClick={save} />
+                      <input type="button" value="Cancel" onClick={cancel} />
+                    </td>
+                  ) : (
+                    <td className={todo.completed ? "mark-as-done" : ""}>
+                      {todo.title}
+                    </td>
+                  )}
+                  <td>
+                    <input type="checkbox" checked={todo.completed} />
+                  </td>
+                  <td>
+                    <button
+                      style={greenbutton}
+                      onClick={() => markAsCompleted(todo.id)}
+                    >
+                      ✓
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      style={editbutton}
+                      onClick={() => {
+                        setEditId(todo.id);
+                        setEditTitle(todo.title);
+                      }}
+                    >
+                      ✍
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      style={redbutton}
+                      onClick={() => deleteTodo(todo.id)}
+                    >
+                      X
+                    </button>
+                  </td>
+                </tr>
+              )
+          )}
         </tbody>
       </table>
+
+      <div>
+        <label>Display Completed tasks?</label>
+        <input
+          type="checkbox"
+          checked={displayCompleted}
+          onChange={() => setDisplayCompleted(!displayCompleted)}
+        />
+      </div>
     </div>
   );
 };
