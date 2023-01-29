@@ -1,0 +1,17 @@
+img {
+  width: 500px;
+  height: 500px;
+  display: flex;
+  margin: 0 auto;
+  position: relative;
+}
+.textQuote {
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 150px;
+  font-size: 18px;
+  bottom: 300px;
+  font-style: italic;
+}
